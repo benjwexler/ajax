@@ -1,30 +1,32 @@
 let symbolsObj = {}
+    
+
+$.ajax({
+    dataType: 'jsonp',
+    // timeout: 5000, // sets timeout to 5 seconds
+    url: "https://api.iextrading.com/1.0/ref-data/symbols",
+    success: function(data){
+
+        // console.log(data[0].symbol)
+
+        for(let i=0; i<data.length; i++) {
+            // console.log(data[i].symbol)
+
+            symbolsObj[(data[i].symbol)] = 1
+        }
+     
+
+
+    }
+
+})
+
+
+
 
 $(function(){
 
-
-    
-
-    $.ajax({
-        dataType: 'jsonp',
-        // timeout: 5000, // sets timeout to 5 seconds
-        url: "https://api.iextrading.com/1.0/ref-data/symbols",
-        success: function(data){
-
-            // console.log(data[0].symbol)
-
-            for(let i=0; i<data.length; i++) {
-                // console.log(data[i].symbol)
-
-                symbolsObj[(data[i].symbol)] = 1
-            }
-         
-
-
-        }
-
-    })
-
+   
 
 
 
@@ -58,6 +60,9 @@ $(function(){
      
     //   var data = $(this).serializeArray();
         let fullPrice 
+        console.log(parseInt(quantity))
+
+    if(Number.isInteger(parseInt(quantity)) && (parseInt(quantity) > 0)) {
 
         if(symbolsObj[`${stockSymbol.toUpperCase()}`] === 1) {
       $.ajax({
@@ -97,6 +102,9 @@ $(function(){
     } else {
         alert("Fake Stock!")
     }
+} else {
+    alert("Please enter a valid quantity")
+}
 
     
   

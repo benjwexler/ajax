@@ -8,7 +8,7 @@ class TodosController < ApplicationController
   
     def create
         # binding.pry
-    #   Todo.create(data)
+      Todo.create(todo_params)
 
       @test = 5
       respond_to do |format|
@@ -18,7 +18,9 @@ class TodosController < ApplicationController
         redirect_to root_path }
     
         # if the response format is javascript, do something else...
-        format.js { p "ijfnr"}
+        format.js { p "ijfnr"
+    
+      }
       end
     end
   

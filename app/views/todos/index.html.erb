@@ -3,15 +3,16 @@
 <%= form_for Todo.new do |f| %>
   <div class="form-group">
     <%= f.text_field :description, placeholder:
-    "what needs doing?" %>
+    "Ticker Symbol" %>
   </div>
 
   <div class="form-group">
-    <%= f.text_field :priority, placeholder: "priority level" %>
+    <%= f.text_field :priority, placeholder: "Quantity" %>
   </div>
 
+
   <div class="form-group">
-  <%= f.submit %>
+  <input type="submit" name="commit" value="Get Price">
   </div>
 <% end %>
 <br>
@@ -20,12 +21,5 @@
   </div>
 
 <ul>
-<% @todos.each do |todo| %>
-  <li>
-    <%= todo.description %><br>
-    <strong>priority: </strong><%= todo.priority %><br>
-    <%= link_to "done", todo_path(todo), method: 'delete' %>
-  </li>
-<% end %>
+<%= render @todos %>
 </ul>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-JSONP/2.4.0/jquery.jsonp.min.js"></script>
