@@ -1,4 +1,6 @@
 let symbolsObj = {}
+
+
     
 
 $.ajax({
@@ -27,10 +29,10 @@ $.ajax({
 $(function(){
 
    
+    
 
 
-
-    $("form").submit(function(event){
+    $("#buyStock").submit(function(event){
       event.preventDefault();
   
       var action = $(this).attr('action');
@@ -39,8 +41,8 @@ $(function(){
     //   var description = $(this).find('#todo_description').val();
     //   var priority = $(this).find('#todo_priority').val();
 
-          var stockSymbol = $(this).find('#todo_description').val();
-      var quantity = $(this).find('#todo_priority').val();
+          var stockSymbol = $(this).find('#realTickerSymbol').val();
+      var quantity = $(this).find('#realQuantity').val();
 
     //   var totalPrice = $(this).find('#totalPrice')
 
@@ -61,21 +63,21 @@ $(function(){
     //   var data = $(this).serializeArray();
         let fullPrice 
         console.log(parseInt(quantity))
+        // console.log(Number.isInteger(quantity))
 
-    if(Number.isInteger(parseInt(quantity)) && (parseInt(quantity) > 0)) {
+    if((parseInt(quantity)) && (parseInt(quantity) > 0)) {
 
         if(symbolsObj[`${stockSymbol.toUpperCase()}`] === 1) {
+
+            // fetches stock price from IEX api
       $.ajax({
-        // method: method,
-        // url: action,
-       
-        // data: data,
+
         url: `https://api.iextrading.com/1.0/stock/${stockSymbol}/price`,
         dataType: 'jsonp',
-        // timeout: 5000, // sets timeout to 5 seconds
+
         
         success: function(data){
-            // write your code here
+
             
                     console.log(data)
 
@@ -84,9 +86,12 @@ $(function(){
 
                     fullPrice = data*quantity 
               
-                    document.getElementById("totalPrice").value = fullPrice
+                    document.getElementById("todo_description").value = stockSymbol
+                    document.getElementById("todo_priority").value = quantity 
+                    document.getElementById("currentPrice").innerText = fullPrice
+                    document.getElementById("buyStock").style.display = "none";
 
-                    ajaxCall2(fullPrice);
+                    // ajaxCall2(fullPrice);
                     
             },
             error: function(xhr, status, error){

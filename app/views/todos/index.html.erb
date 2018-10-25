@@ -1,13 +1,17 @@
 <h1>My Todos</h1>
 
+<div id="priceQuoteContainer"> 
+    <div id="currentPrice"> </div>
+    <button id="confirmPurchaseBtn"> </button>
+</div>
+
 <%= form_for Todo.new do |f| %>
   <div class="form-group">
-    <%= f.text_field :description, placeholder:
-    "Ticker Symbol" %>
+    <input placeholder="Ticker Symbol" type="text" name="todo[description]" id="todo_description">
   </div>
 
   <div class="form-group">
-    <%= f.text_field :priority, placeholder: "Quantity" %>
+    <input placeholder="Quantity" type="number" name="todo[priority]" id="todo_priority">
   </div>
 
 
@@ -16,10 +20,28 @@
   </div>
 <% end %>
 <br>
-<div>
-    <input placeholder="Total Price to Come" type="text" id="totalPrice">
+
+<form id="buyStock" action="/todos" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="7q/uAGwB7Pa8/rdAEbhYr4F28B1jxb+BhrbTbImY2fDLrx/VSyqmXyDBVzYf7Cx7R4Qmn5ayemlDuEWLZ3jWAA==">
+<div class="form-group">
+<input placeholder="Ticker Symbol" type="text" id="realTickerSymbol">
+</div>
+
+<div class="form-group">
+<input placeholder="Quantity" type="text" id="realQuantity">
+</div>
+
+
+  <div class="form-group">
+  <input id"hiddenBuyBtn" type="submit" name="commit" value="Hidden Buy Button">
   </div>
+</form>
+
+
+ 
 
 <ul>
 <%= render @todos %>
 </ul>
+
+
+
