@@ -13,7 +13,13 @@ $.ajax({
 $(function () {
     let confirmPurchase = document.getElementById("confirmPurchaseBtn")
     let cancelPurchase = document.getElementById("cancelPurchaseBtn")
+
+   
+
     const cashBalance = parseInt(document.getElementById("cashBalance").innerText)
+    // var cashBalance = Number(notFormatedcashBalance.replace(/[^0-9.-]+/g,""));
+    
+
     function clickHiddenForm() {
         document.getElementById("hiddenBuyButton").click();
     }
@@ -59,10 +65,14 @@ function firstIexCall() {
             dataType: 'jsonp',
             success: function (data) {
                 console.log(data)
-                fullPrice = data * quantity
+                // fullPrice = data * quantity
+                if(fullPrice < cashBalance) { 
                 document.getElementById("todo_description").value = fullPrice
             document.getElementById("todo_priority").value = fullPrice
                 clickHiddenForm()
+                } else {
+                    alert("Sorry, insufficient funds")
+                }
             }
         });
 
