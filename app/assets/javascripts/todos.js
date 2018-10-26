@@ -24,46 +24,20 @@ $.ajax({
 })
 
 
-
-
 $(function(){
-
-   
-    
-
-
     $("#buyStock").submit(function(event){
       event.preventDefault();
-  
       var action = $(this).attr('action');
       var method = $(this).attr('method');
-  
-    //   var description = $(this).find('#todo_description').val();
-    //   var priority = $(this).find('#todo_priority').val();
-
           var stockSymbol = $(this).find('#realTickerSymbol').val();
       var quantity = $(this).find('#realQuantity').val();
 
-    //   var totalPrice = $(this).find('#totalPrice')
-
-   
-
-      function ajaxCall2(){
-        $.ajax({
-        method: method,
-        url: action,
-        data: { todo: {description: fullPrice, priority: quantity} },
-       
-        // data: fullPrice,
-        dataType: 'script'
-           
-        });
-    }
+     
      
     //   var data = $(this).serializeArray();
         let fullPrice 
         console.log(parseInt(quantity))
-        // console.log(Number.isInteger(quantity))
+
 
     if((parseInt(quantity)) && (parseInt(quantity) > 0)) {
 
@@ -88,10 +62,10 @@ $(function(){
               
                     document.getElementById("todo_description").value = stockSymbol
                     document.getElementById("todo_priority").value = quantity 
-                    document.getElementById("currentPrice").innerText = fullPrice
+                    document.getElementById("currentPrice").innerText = `The total price is $${fullPrice}`
                     document.getElementById("buyStock").style.display = "none";
-
-                    // ajaxCall2(fullPrice);
+                    document.getElementById("priceQuoteContainer").style.display = "flex";
+                    // post2database(fullPrice);
                     
             },
             error: function(xhr, status, error){
@@ -109,6 +83,17 @@ $(function(){
     }
 } else {
     alert("Please enter a valid quantity")
+}
+function post2database(){
+    $.ajax({
+    method: method,
+    url: action,
+    data: { todo: {description: fullPrice, priority: quantity} },
+   
+    // data: fullPrice,
+    dataType: 'script'
+       
+    });
 }
 
     
