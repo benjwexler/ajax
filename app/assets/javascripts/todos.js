@@ -13,7 +13,7 @@ $.ajax({
 $(function () {
     let confirmPurchase = document.getElementById("confirmPurchaseBtn")
     let cancelPurchase = document.getElementById("cancelPurchaseBtn")
-
+    const cashBalance = parseInt(document.getElementById("cashBalance").innerText)
     function clickHiddenForm() {
         document.getElementById("hiddenBuyButton").click();
     }
@@ -39,11 +39,14 @@ function firstIexCall() {
             console.log(data)
             console.log(data * quantity)
             fullPrice = data * quantity
+            if(fullPrice < cashBalance) { 
             fullPrice = fullPrice.toFixed(2)
             document.getElementById("currentPrice").innerText = `The total price is $${fullPrice}`
             document.getElementById("buyStock").style.display = "none";
             document.getElementById("priceQuoteContainer").style.display = "flex";
-            
+            } else {
+                alert("Sorry, insufficient funds")
+            }
         }
 
     });
