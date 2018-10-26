@@ -12,6 +12,7 @@ $.ajax({
 
 $(function () {
     let confirmPurchase = document.getElementById("confirmPurchaseBtn")
+    let cancelPurchase = document.getElementById("cancelPurchaseBtn")
 
     function clickHiddenForm() {
         document.getElementById("hiddenBuyButton").click();
@@ -38,6 +39,7 @@ function firstIexCall() {
             console.log(data)
             console.log(data * quantity)
             fullPrice = data * quantity
+            fullPrice = fullPrice.toFixed(2)
             document.getElementById("currentPrice").innerText = `The total price is $${fullPrice}`
             document.getElementById("buyStock").style.display = "none";
             document.getElementById("priceQuoteContainer").style.display = "flex";
@@ -67,7 +69,11 @@ function firstIexCall() {
 
     $("#confirmPurchaseBtn").click(function () {
         secondIexCall()
-        
+    });
+
+    $("#cancelPurchaseBtn").click(function () {
+        document.getElementById("buyStock").style.display = "flex";
+            document.getElementById("priceQuoteContainer").style.display = "none";
     });
 
 
