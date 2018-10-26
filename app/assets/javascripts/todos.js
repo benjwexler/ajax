@@ -1,14 +1,14 @@
 let symbolsObj = {}
 
-$.ajax({
-    dataType: 'jsonp',
-    url: "https://api.iextrading.com/1.0/ref-data/symbols",
-    success: function (data) {
-        for (let i = 0; i < data.length; i++) {
-            symbolsObj[(data[i].symbol)] = 1
-        }
-    }
-});
+// $.ajax({
+//     dataType: 'jsonp',
+//     url: "https://api.iextrading.com/1.0/ref-data/symbols",
+//     success: function (data) {
+//         for (let i = 0; i < data.length; i++) {
+//             symbolsObj[(data[i].symbol)] = 1
+//         }
+//     }
+// });
 
 $(function () {
     let confirmPurchase = document.getElementById("confirmPurchaseBtn")
@@ -53,6 +53,8 @@ function firstIexCall() {
             } else {
                 alert("Sorry, insufficient funds")
             }
+        }, error: function (data) {
+            alert("Please check that you submitted a valid ticker symbol")
         }
 
     });
@@ -73,6 +75,8 @@ function firstIexCall() {
                 } else {
                     alert("Sorry, insufficient funds")
                 }
+            }, error: function (data) {
+                alert("Please check that you submitted a valid ticker symbol")
             }
         });
 
@@ -106,14 +110,14 @@ function firstIexCall() {
 
         if ((parseInt(quantity)) && (parseInt(quantity) > 0)) {
 
-            if (symbolsObj[`${stockSymbol.toUpperCase()}`] === 1) {
+            // if (symbolsObj[`${stockSymbol.toUpperCase()}`] === 1) {
 
-                // fetches stock price from IEX api
+            
                 firstIexCall() 
 
-            } else {
-                alert("Fake Stock!")
-            }
+            // } else {
+            //     alert("Fake Stock!")
+            // }
         } else {
             alert("Please enter a valid quantity")
         }
