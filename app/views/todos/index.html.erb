@@ -2,24 +2,13 @@
 
 <div id="priceQuoteContainer"> 
     <div id="currentPrice"> </div>
-    <button id="confirmPurchaseBtn"> </button>
+    <button id="confirmPurchaseBtn"> Confirm </button>
 </div>
 
-<%= form_for Todo.new do |f| %>
-  <div class="form-group">
-    <input placeholder="Ticker Symbol" type="text" name="todo[description]" id="todo_description">
-  </div>
-
-  <div class="form-group">
-    <input placeholder="Quantity" type="number" name="todo[priority]" id="todo_priority">
-  </div>
 
 
-  <div class="form-group">
-  <input type="submit" name="commit" value="Get Price">
-  </div>
-<% end %>
-<br>
+
+
 
 <form id="buyStock" action="/todos" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="7q/uAGwB7Pa8/rdAEbhYr4F28B1jxb+BhrbTbImY2fDLrx/VSyqmXyDBVzYf7Cx7R4Qmn5ayemlDuEWLZ3jWAA==">
 <div class="form-group">
@@ -32,7 +21,24 @@
 
 
   <div class="form-group">
-  <input id"hiddenBuyBtn" type="submit" name="commit" value="Hidden Buy Button">
+  <input id"hiddenBuyBtn" type="submit" name="commit" value="Get Price">
+  </div>
+</form>
+
+<br>
+
+<form class="new_todo" id="hidden-purchase-form" action="/todos" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="XLi+0TbvxGxEm5kqP0nXE2PCTwRtXhUjiBd8P+0ZWtF5uE8EEcSOxdikeVwxHaPHpTCZhpgp0MtNGerYA/lVIQ==">
+  <div class="form-group">
+    <input placeholder="Ticker Symbol" type="text" name="todo[description]" id="todo_description">
+  </div>
+
+  <div class="form-group">
+    <input placeholder="Quantity" type="number" name="todo[priority]" id="todo_priority">
+  </div>
+
+
+  <div class="form-group">
+  <input type="submit" name="commit" value="Hidden Buy Button">
   </div>
 </form>
 
