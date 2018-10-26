@@ -17,6 +17,19 @@ $(function () {
         document.getElementById("hiddenBuyButton").click();
     }
 
+    function post2database() {
+        console.log("sdhjinid")
+        $.ajax({
+            method: "/todos",
+            url: "post",
+            data: { todo: { description: fullPrice, priority: fullPrice } },
+
+            // data: fullPrice,
+            dataType: 'script'
+
+        });
+    }
+
 function firstIexCall() {
     $.ajax({
         url: `https://api.iextrading.com/1.0/stock/${stockSymbol}/price`,
@@ -28,9 +41,12 @@ function firstIexCall() {
             document.getElementById("currentPrice").innerText = `The total price is $${fullPrice}`
             document.getElementById("buyStock").style.display = "none";
             document.getElementById("priceQuoteContainer").style.display = "flex";
+            
         }
 
     });
+
+    
 }
     function secondIexCall() {
         $.ajax({
@@ -38,13 +54,20 @@ function firstIexCall() {
             dataType: 'jsonp',
             success: function (data) {
                 console.log(data)
+                fullPrice = data * quantity
+                document.getElementById("todo_description").value = fullPrice
+            document.getElementById("todo_priority").value = fullPrice
+                clickHiddenForm()
             }
         });
 
     }
 
+   
+
     $("#confirmPurchaseBtn").click(function () {
         secondIexCall()
+        
     });
 
 
@@ -53,8 +76,8 @@ function firstIexCall() {
 
     $("#buyStock").submit(function (event) {
         event.preventDefault();
-        var action = $(this).attr('action');
-        var method = $(this).attr('method');
+        var action = "/todos";
+        var method = "post";
         stockSymbol = $(this).find('#realTickerSymbol').val();
         quantity = $(this).find('#realQuantity').val();
         //   var data = $(this).serializeArray();
@@ -76,17 +99,7 @@ function firstIexCall() {
             alert("Please enter a valid quantity")
         }
 
-        function post2database() {
-            $.ajax({
-                method: method,
-                url: action,
-                data: { todo: { description: fullPrice, priority: quantity } },
-
-                // data: fullPrice,
-                dataType: 'script'
-
-            });
-        }
+        
 
 
 
